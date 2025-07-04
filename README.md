@@ -1,113 +1,79 @@
-🚗 Wi-Fi Controlled Smart Robot Car with Auto-Brake and Camera Feed
-This is a Raspberry Pi–based intelligent robot car controlled via a custom Android app. It integrates Wi-Fi-based directional control, real-time camera streaming, an auto-brake system using the HC-SR04 ultrasonic sensor, and servo steering—all powered by a Python Flask server.
+# 🤖 Smart Wi-Fi Controlled Robot Car with Auto-Brake and Live Camera
 
-🔧 Features
-🎮 App-Controlled: Drive forward/backward and steer left/right via intuitive Android app sliders.
+This project implements a Wi-Fi-controlled robot car powered by a **Raspberry Pi**. It features real-time control via an Android app, **servo steering**, **motor drive**, **obstacle auto-braking**, and a **live camera feed**. Designed with a responsive UI, robust embedded logic, and safety features like ultrasonic-based collision prevention, the system is modular, expandable, and IoT-ready.
 
-🧠 Auto-Brake System: Continuously monitors distance using an HC-SR04 ultrasonic sensor. If an obstacle is detected within a threshold, the car stops automatically and turns on a brake LED.
+---
 
-📸 Live Camera Feed: Real-time video streaming to the app using a USB camera connected to the Raspberry Pi.
+## 🚀 Features
 
-🔄 Servo Steering: Smooth control over direction using a 0°–180° range servo motor.
+- 📱 **Android App Control**  
+  Smooth control of direction and speed via intuitive sliders.
 
-💡 Expandable: Designed to include future features like headlight control, obstacle avoidance, and object detection.
+- 🎮 **Dual Motor Drive**  
+  Controlled via ENA/ENB PWM pins and H-bridge logic for forward/backward motion.
 
-🧱 System Architecture
-Raspberry Pi (Hardware)
-Motor Driver: L298N H-Bridge module
+- 🌀 **Steering Servo**  
+  Servo motor smoothly steers based on user input angle (45° to 135°).
 
-Motors: 2 DC motors (left/right)
+- 🧠 **Auto-Brake System**  
+  HC-SR04 distance sensor constantly monitors for nearby obstacles. If within threshold, the system:
+  - Stops motors
+  - Turns on Brake LED
 
-PWM Pins: Hardware PWM via pigpio on GPIO 12 & 18
+- 🎥 **Live Camera Feed**  
+  WebView embedded video stream via `cv2.VideoCapture` and Flask endpoint.
 
-Ultrasonic Sensor: HC-SR04 for distance sensing
+- 🌐 **Flask Web Server**  
+  - `/drive`: Receives speed and steering angle from app
+  - `/autobrake`: Toggles auto-brake logic
+  - `/distance`: Returns real-time ultrasonic distance
+  - `/video_feed`: Streams camera frames
 
-Servo Motor: For steering (controlled via pigpio)
+---
 
-LED: Indicates auto-brake activation
+## 📡 Hardware Overview
 
-USB Camera: For live streaming
+| Component        | Description                              |
+|------------------|------------------------------------------|
+| Raspberry Pi     | Central controller                       |
+| L298N Module     | Dual motor driver                        |
+| SG90 Servo       | Steering control                         |
+| HC-SR04          | Distance sensor for auto-brake           |
+| LEDs             | Visual indicators                        |
+| Webcam/CSI cam   | Live feed                                |
+| Android Phone    | Control interface via custom app         |
 
-Android App (Client)
-Built using Android Studio
+---
 
-Controls gear (speed), steering angle, and toggles auto-brake
+## 🔌 GPIO Pin Assignments (BCM Mode)
 
-Displays live camera feed from the Raspberry Pi
+| Signal         | GPIO Pin | Usage                    |
+|----------------|-----------|--------------------------|
+| ENA            | 12        | Right Motor PWM          |
+| ENB            | 18        | Left Motor PWM           |
+| IN1, IN2       | 27, 17    | Right Motor Direction     |
+| IN3, IN4       | 4, 3      | Left Motor Direction      |
+| SERVO          | 13        | PWM for Steering Servo    |
+| TRIG, ECHO     | 10, 21    | HC-SR04 Ultrasonic Sensor |
+| BRAKE_LED      | 26        | Obstacle Detected LED     |
 
-Simple, clean UI with gradient backgrounds and custom slider views
+---
 
-🚀 How It Works
-The app sends drive and angle commands via HTTP POST requests.
+## 📱 App UI and Design
 
-The Flask server on the Pi processes these commands, sets motor directions and speeds, and adjusts the servo angle.
+- Built with Android Studio using **ConstraintLayout**
+- Background UI features futuristic circuit board aesthetics
+- Gear and steering sliders visually enhanced with gradients and rounded shapes
+- Brake switch toggle for enabling/disabling auto-brake
 
-A background thread continuously monitors the HC-SR04 sensor.
+---
 
-If an obstacle is too close and auto-brake is enabled, the car stops and LED turns on.
+## 🛠️ Running the Flask Server Automatically on Boot
 
-If obstacle is cleared or auto-brake is turned off, driving resumes.
+To ensure the robot is always responsive without needing to manually launch the script:
 
-🗂 Project Structure
-Raspberry Pi Code
-car_server.py – Main Flask server code for handling control, auto-brake, camera feed
+### 🔄 Method: Using `crontab`
 
-autobrake_test.py – Standalone script for testing the ultrasonic-based auto-brake system
-
-Android Studio App
-MainActivity.java – UI and networking logic
-
-GearSliderView.java, SteeringSliderView.java – Custom sliders
-
-res/drawable – Backgrounds and gradients
-
-AndroidManifest.xml and layout XMLs
-
-📸 Demo
-Add a short screen recording or GIF of the app controlling the robot, or a YouTube link if available.
-
-📦 Getting Started
-Raspberry Pi Setup
-Enable camera and install required packages:
-
-bash
-Copy
-Edit
-sudo apt update
-sudo apt install pigpio python3-flask python3-opencv
-sudo systemctl enable pigpiod
-sudo systemctl start pigpiod
-Clone the repo and run:
-
-bash
-Copy
-Edit
-python3 car_server.py
-Android App
-Open project in Android Studio.
-
-Update server IP in the app code.
-
-Build and install APK on your phone.
-
-📁 Resources
-📂 [Google Drive Link] – Contains diagrams, videos, test results, and APK
-
-🧠 [GitHub Repo] – Full source code for both Android and Raspberry Pi sides
-
-📌 Project Scope
-Embedded Systems
-
-Computer Vision
-
-Robotics
-
-Mobile App Development
-
-IoT & Networking
-
-✍️ Author
-Name, University of Moratuwa
-Index No: Your Index
-Email: youruni@uom.lk
-
+1. Edit crontab:
+   ```bash
+   crontab -e
