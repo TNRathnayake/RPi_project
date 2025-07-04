@@ -80,7 +80,7 @@ To have `car_server.py` launch automatically without manual intervention, we cre
 
 ## 📸 Demo
 
-![App Demo](screenshots/demo.gif)
+![App Demo](robot.gif)
 
 
 ---
