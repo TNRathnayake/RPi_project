@@ -1,79 +1,136 @@
-# 🤖 Smart Wi-Fi Controlled Robot Car with Auto-Brake and Live Camera
+# 🚗 Wi-Fi Controlled Smart Robot Car with Auto-Brake and Camera Feed
 
-This project implements a Wi-Fi-controlled robot car powered by a **Raspberry Pi**. It features real-time control via an Android app, **servo steering**, **motor drive**, **obstacle auto-braking**, and a **live camera feed**. Designed with a responsive UI, robust embedded logic, and safety features like ultrasonic-based collision prevention, the system is modular, expandable, and IoT-ready.
-
----
-
-## 🚀 Features
-
-- 📱 **Android App Control**  
-  Smooth control of direction and speed via intuitive sliders.
-
-- 🎮 **Dual Motor Drive**  
-  Controlled via ENA/ENB PWM pins and H-bridge logic for forward/backward motion.
-
-- 🌀 **Steering Servo**  
-  Servo motor smoothly steers based on user input angle (45° to 135°).
-
-- 🧠 **Auto-Brake System**  
-  HC-SR04 distance sensor constantly monitors for nearby obstacles. If within threshold, the system:
-  - Stops motors
-  - Turns on Brake LED
-
-- 🎥 **Live Camera Feed**  
-  WebView embedded video stream via `cv2.VideoCapture` and Flask endpoint.
-
-- 🌐 **Flask Web Server**  
-  - `/drive`: Receives speed and steering angle from app
-  - `/autobrake`: Toggles auto-brake logic
-  - `/distance`: Returns real-time ultrasonic distance
-  - `/video_feed`: Streams camera frames
+This is a Raspberry Pi–based intelligent robot car controlled via a custom Android app. It integrates Wi-Fi-based directional control, real-time camera streaming, an auto-brake system using the HC-SR04 ultrasonic sensor, and servo steering—all powered by a Python Flask server.
 
 ---
 
-## 📡 Hardware Overview
+## 🔧 Features
 
-| Component        | Description                              |
-|------------------|------------------------------------------|
-| Raspberry Pi     | Central controller                       |
-| L298N Module     | Dual motor driver                        |
-| SG90 Servo       | Steering control                         |
-| HC-SR04          | Distance sensor for auto-brake           |
-| LEDs             | Visual indicators                        |
-| Webcam/CSI cam   | Live feed                                |
-| Android Phone    | Control interface via custom app         |
+- 🎮 **App-Controlled**: Drive forward/backward and steer left/right via intuitive Android app sliders.
+- 🧠 **Auto-Brake System**: Continuously monitors distance using an HC-SR04 ultrasonic sensor. If an obstacle is detected within a threshold, the car stops automatically and turns on a brake LED.
+- 📸 **Live Camera Feed**: Real-time video streaming to the app using a USB camera connected to the Raspberry Pi.
+- 🔄 **Servo Steering**: Smooth control over direction using a 0°–180° range servo motor.
+- 💡 **Expandable**: Designed to include future features like headlight control, obstacle avoidance, and object detection.
 
 ---
 
-## 🔌 GPIO Pin Assignments (BCM Mode)
+## 🧱 System Architecture
 
-| Signal         | GPIO Pin | Usage                    |
-|----------------|-----------|--------------------------|
-| ENA            | 12        | Right Motor PWM          |
-| ENB            | 18        | Left Motor PWM           |
-| IN1, IN2       | 27, 17    | Right Motor Direction     |
-| IN3, IN4       | 4, 3      | Left Motor Direction      |
-| SERVO          | 13        | PWM for Steering Servo    |
-| TRIG, ECHO     | 10, 21    | HC-SR04 Ultrasonic Sensor |
-| BRAKE_LED      | 26        | Obstacle Detected LED     |
+### Raspberry Pi (Hardware)
+
+| Component        | Function                             |
+|------------------|--------------------------------------|
+| L298N H-Bridge   | Motor driver for left & right motors |
+| DC Motors        | For movement                         |
+| pigpio (GPIO 12,18) | Hardware PWM control              |
+| HC-SR04 Sensor   | Distance detection for auto-brake    |
+| SG90 Servo       | Steering control (via GPIO 13)       |
+| LED              | Brake indication (GPIO 26)           |
+| USB Camera       | Real-time video feed to app          |
+
+### Android App (Client)
+
+- Built using **Android Studio**
+- Controls:
+  - Gear (forward/backward)
+  - Steering angle
+  - Auto-brake toggle
+- Displays:
+  - Live video feed from Pi
+- UI Elements:
+  - Custom sliders with gradients
+  - Circuit-themed background
 
 ---
 
-## 📱 App UI and Design
+## 🚀 How It Works
 
-- Built with Android Studio using **ConstraintLayout**
-- Background UI features futuristic circuit board aesthetics
-- Gear and steering sliders visually enhanced with gradients and rounded shapes
-- Brake switch toggle for enabling/disabling auto-brake
+- App sends speed and angle via HTTP POST to Flask server
+- `car_server.py` handles:
+  - Driving logic with PWM
+  - Servo angle mapping
+  - HC-SR04 distance monitoring in a background thread
+- If object is too close:
+  - Motors stop
+  - Brake LED turns on
+- Once clear or auto-brake is disabled:
+  - Resume motion
+  - LED off
 
 ---
 
-## 🛠️ Running the Flask Server Automatically on Boot
+## 🗂 Project Structure
 
-To ensure the robot is always responsive without needing to manually launch the script:
+### Raspberry Pi Code
 
-### 🔄 Method: Using `crontab`
+- `car_server.py` – Main Flask server code for handling control, auto-brake, camera feed
+- `autobrake_test.py` – Standalone script for testing the ultrasonic-based auto-brake system
 
-1. Edit crontab:
-   ```bash
-   crontab -e
+### Android Studio App
+
+- `MainActivity.java` – UI and networking logic
+- `GearSliderView.java`, `SteeringSliderView.java` – Custom sliders
+- `res/drawable/` – Backgrounds and gradients
+- `AndroidManifest.xml` and layout XMLs
+
+---
+
+## 📸 Demo
+
+> *Add a short screen recording or GIF of the app controlling the robot, or a YouTube link if available.*
+
+---
+
+## 📦 Getting Started
+
+### Raspberry Pi Setup
+
+1. Enable camera and install required packages:
+
+    ```bash
+    sudo apt update
+    sudo apt install pigpio python3-flask python3-opencv
+    sudo systemctl enable pigpiod
+    sudo systemctl start pigpiod
+    ```
+
+2. Clone the repo and run:
+
+    ```bash
+    python3 car_server.py
+    ```
+
+### Android App
+
+1. Open project in Android Studio.
+2. Update server IP in the app code.
+3. Build and install APK on your phone.
+
+---
+
+## 📁 Resources
+
+- 📂 **[Google Drive Link]** – Contains diagrams, videos, test results, and APK
+- 🧠 **[GitHub Repo]** – Full source code for both Android and Raspberry Pi sides
+
+---
+
+## 📌 Project Scope
+
+- **Embedded Systems**
+- **Computer Vision**
+- **Robotics**
+- **Mobile App Development**
+- **IoT & Networking**
+
+---
+
+## ✍️ Author
+
+> **Your Name**, *University of Moratuwa*  
+> Index No: *Your Index*  
+> Email: [youruni@uom.lk](mailto:youruni@uom.lk)
+
+---
+
+
