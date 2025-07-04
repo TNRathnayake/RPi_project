@@ -26,7 +26,7 @@ This is a Raspberry Pi–based intelligent robot car controlled via a custom And
 | HC-SR04 Sensor   | Distance detection for auto-brake    |
 | SG90 Servo       | Steering control (via GPIO 13)       |
 | LED              | Brake indication (GPIO 26)           |
-| USB Camera       | Real-time video feed to app          |
+| v1.3 5MP Camera       | Real-time video feed to app          |
 
 ### Android App (Client)
 
