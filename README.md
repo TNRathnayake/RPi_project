@@ -80,7 +80,8 @@ To have `car_server.py` launch automatically without manual intervention, we cre
 
 ## 📸 Demo
 
-> *Add a short screen recording or GIF of the app controlling the robot, or a YouTube link if available.*
+![App Demo](screenshots/demo.gif)
+
 
 ---
 
@@ -111,10 +112,11 @@ To have `car_server.py` launch automatically without manual intervention, we cre
 
 ---
 
-## 📁 Resources
+## 📁 Addtional Resources
 
-- 📂 **[Google Drive Link]** – Contains diagrams, videos, test results, and APK
-- 🧠 **[GitHub Repo]** – Full source code for both Android and Raspberry Pi sides
+- 📂 **[Google Drive Folder](https://drive.google.com/drive/folders/1aB…XYZ)** – Contains diagrams, videos, test results, and APK  
+- 🧠 **[GitHub Repository](https://github.com/your-username/robot-car)** – Full source code for both Android and Raspberry Pi sides
+
 
 ---
 
@@ -130,9 +132,9 @@ To have `car_server.py` launch automatically without manual intervention, we cre
 
 ## ✍️ Author
 
-> **Your Name**, *University of Moratuwa*  
-> Index No: *Your Index*  
-> Email: [youruni@uom.lk](mailto:youruni@uom.lk)
+> **Tharindu Nimesh**, *University of Moratuwa*  
+> Index No: *220528X*  
+> Email: [rathnayakermtnb.22@uom.lk](mailto:nimeshrathnayake1000@gmail.com)
 
 ---
 
