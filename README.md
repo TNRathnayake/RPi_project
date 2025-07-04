@@ -130,6 +130,24 @@ To have `car_server.py` launch automatically without manual intervention, we cre
 
 ---
 
+## 🔮 Upcoming Features
+
+- 💡 **Headlight Control**  
+  Remotely toggle front and rear LEDs via the app for night driving.
+
+- 📷 **Object Detection**  
+  Integrate a lightweight ML model (e.g. YOLO) on the Pi to identify obstacles and adjust behavior.
+  
+- 📲 **Device Discovery & Selection**  
+  Build an app interface that scans the local network for available robot devices and lets the user choose which Raspberry Pi to connect to before driving.
+
+- 🗣️ **Voice Commands**  
+  Add speech recognition to control movement, lights, and capture images hands-free.
+
+- 🌐 **Remote Access**  
+  Enable secure tunnel (e.g. ngrok or VPN) to control the robot over the internet, not just local Wi-Fi.
+
+---
 ## ✍️ Author
 
 > **Tharindu Nimesh**, *University of Moratuwa*  
