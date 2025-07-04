@@ -50,8 +50,8 @@ This is a Raspberry Pi–based intelligent robot car controlled via a custom And
   - Driving logic with PWM
   - Servo angle mapping
   - HC-SR04 distance monitoring in a background thread
-- If object is too close:
-  - Motors stop
+- If an obstacle is too close:
+  - Motors stop (Doesn't move forward)
   - Brake LED turns on
 - Once clear or auto-brake is disabled:
   - Resume motion
@@ -65,6 +65,10 @@ This is a Raspberry Pi–based intelligent robot car controlled via a custom And
 
 - `car_server.py` – Main Flask server code for handling control, auto-brake, camera feed
 - `autobrake_test.py` – Standalone script for testing the ultrasonic-based auto-brake system
+
+### Auto-Start on Boot (systemd)
+
+To have `car_server.py` launch automatically without manual intervention, we created a systemd service.
 
 ### Android Studio App
 
