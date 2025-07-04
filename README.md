@@ -152,7 +152,7 @@ To have `car_server.py` launch automatically without manual intervention, we cre
 
 > **Tharindu Nimesh**, *University of Moratuwa*  
 > Index No: *220528X*  
-> Email: [rathnayakermtnb.22@uom.lk](mailto:nimeshrathnayake1000@gmail.com)
+> Email: [rathnayakermtnb.22@uom.lk](mailto:rathnayakermtnb.22@uom.lk)
 
 ---
 
