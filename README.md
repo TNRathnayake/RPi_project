@@ -115,7 +115,7 @@ To have `car_server.py` launch automatically without manual intervention, we cre
 ## 📁 Addtional Resources
 
 - 📂 **[Google Drive Folder](https://drive.google.com/drive/folders/1aB…XYZ)** – Contains diagrams, videos, test results, and APK  
-- 🧠 **[GitHub Repository](https://github.com/your-username/robot-car)** – Full source code for both Android and Raspberry Pi sides
+- 🧠 **[GitHub Repository](https://github.com/TNRathnayake/RPi_project/)** – Full source code for both Android and Raspberry Pi sides
 
 
 ---
