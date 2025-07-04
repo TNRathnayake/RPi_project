@@ -1,4 +1,4 @@
-# 🚗 Wi-Fi Controlled Smart Robot Car with Auto-Brake and Camera Feed
+# 🚗 Wi-Fi Controlled Smart Robot Car
 
 This is a Raspberry Pi–based intelligent robot car controlled via a custom Android app. It integrates Wi-Fi-based directional control, real-time camera streaming, an auto-brake system using the HC-SR04 ultrasonic sensor, and servo steering—all powered by a Python Flask server.
 
