@@ -1,0 +1,16 @@
+[Unit]
+Description=Car Control Flask Server
+After=network-online.target
+
+[Service]
+ExecStart=/home/pi/carbot-env/bin/python /home/pi/car_server.py
+WorkingDirectory=/home/pi
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
+
