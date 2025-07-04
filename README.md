@@ -64,7 +64,6 @@ This is a Raspberry Pi–based intelligent robot car controlled via a custom And
 ### Raspberry Pi Code
 
 - `car_server.py` – Main Flask server code for handling control, auto-brake, camera feed
-- `autobrake_test.py` – Standalone script for testing the ultrasonic-based auto-brake system
 
 ### Auto-Start on Boot (systemd)
 
